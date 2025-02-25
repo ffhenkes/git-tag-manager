@@ -5,7 +5,7 @@
 #+OPTIONS: toc:nil
 
 * Overview
-**Git Tag Manager** is a shell-based utility that simplifies the management of Git tags across projects. It enables users to configure project aliases, increment semantic versions (major, minor, patch, and build), and ensure synchronization with remote repositories. The tool is designed to streamline versioning workflows with clear and consistent tag generation.
+*Git Tag Manager* is a shell-based utility that simplifies the management of Git tags across projects. It enables users to configure project aliases, increment semantic versions (major, minor, patch, and build), and ensure synchronization with remote repositories. The tool is designed to streamline versioning workflows with clear and consistent tag generation.
 
 * Features
 - Project Configuration: Associate project aliases with local paths and remote URLs.
