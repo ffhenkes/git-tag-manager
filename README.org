@@ -88,6 +88,12 @@ git-tag-manager --alias chest --major --inc
 #+END_SRC
 - Latest tag: =1.1.0-4= → New tag: =2.0.0=
 
+** Release Version Without Build
+#+BEGIN_SRC bash
+git-tag-manager --alias chest --major
+#+END_SRC
+- Latest tag: =1.1.0-4= → New tag: =1.1.0=
+
 ** Dry Run Example
 #+BEGIN_SRC bash
 git-tag-manager --alias chest --build --patch --inc --dry-run
