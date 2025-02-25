@@ -59,7 +59,7 @@ git-tag-manager [COMMANDS] [OPTIONS]
 * Examples
 ** Configure a Project
 #+BEGIN_SRC bash
-git-tag-manager --config chest|/home/user/project/trove-chest/|git@your-git-server:trove-chest.git
+git-tag-manager --config "chest|/home/user/project/trove-chest/|git@your-git-server:trove-chest.git"
 #+END_SRC
 - Checks if the local path exists and verifies the remote URL.
 - Clones the repository and sets up the remote if not found.
