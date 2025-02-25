@@ -307,7 +307,7 @@ fi
 
 echo "Tag '$NEW_TAG' created successfully."
 
-# Optionally push the tag: if --dry-run is set, print the push command; otherwise, push.
+# Finally push the tag: if --dry-run is set, print the push command; otherwise, push.
 if $DRY_RUN; then
     printf "git push origin %s\n" "$NEW_TAG"
 else
