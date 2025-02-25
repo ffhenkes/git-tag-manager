@@ -1,0 +1,110 @@
+#+TITLE: Git Tag Manager
+#+AUTHOR: 
+#+DATE: 
+#+DESCRIPTION: Utility for managing Git tags with version increment and remote synchronization.
+#+OPTIONS: toc:nil
+
+* Overview
+**Git Tag Manager** is a shell-based utility that simplifies the management of Git tags across projects. It enables users to configure project aliases, increment semantic versions (major, minor, patch, and build), and ensure synchronization with remote repositories. The tool is designed to streamline versioning workflows with clear and consistent tag generation.
+
+* Features
+- Project Configuration: Associate project aliases with local paths and remote URLs.
+- Version Incrementation: Increment major, minor, patch, or build versions based on existing tags.
+- Remote Synchronization: Always fetches the latest remote tags before creating new ones.
+- Dry Run Mode: Display the Git push command without executing it.
+- Help Command: Provides detailed usage instructions.
+
+* Installation
+** Prerequisites
+- Git installed and configured with SSH keys for remote access.
+- Make installed.
+
+** Steps
+1. Clone the repository:
+   #+BEGIN_SRC bash
+   git clone <repository_url>
+   cd <repository_directory>
+   #+END_SRC
+
+2. Build the project:
+   #+BEGIN_SRC bash
+   make build
+   #+END_SRC
+
+3. Install the binary:
+   #+BEGIN_SRC bash
+   cp dist/git-tag-manager /usr/local/bin/
+   #+END_SRC
+
+#+TIP: Ensure =/usr/local/bin/= is in your =$PATH$=. Verify installation:
+#+BEGIN_SRC bash
+git-tag-manager --help
+#+END_SRC
+
+* Usage
+** Command Structure
+#+BEGIN_SRC bash
+git-tag-manager [COMMANDS] [OPTIONS]
+#+END_SRC
+
+** Commands
+- ~--config <alias>|<local_path>|<remote_url>~ :: Configure a project with an alias, local path, and remote URL.
+- ~--alias <alias>~ :: Select the project by alias for subsequent operations.
+- ~--build~ :: Target the build number for incrementation.
+- ~--inc~ :: Increment the selected version component.
+- ~--major~, ~--minor~, ~--patch~ :: Specify which part of the version to increment.
+- ~--dry-run~ :: Show the Git push command without executing it.
+- ~--help~ :: Display this help message.
+
+* Examples
+** Configure a Project
+#+BEGIN_SRC bash
+git-tag-manager --config chest|/home/user/project/trove-chest/|git@your-git-server:trove-chest.git
+#+END_SRC
+- Checks if the local path exists and verifies the remote URL.
+- Clones the repository and sets up the remote if not found.
+
+** Increment Build Number
+#+BEGIN_SRC bash
+git-tag-manager --alias chest --build --inc
+#+END_SRC
+- Latest tag: =1.0.0-1= → New tag: =1.0.0-2=
+
+** Increment Patch and Reset Build
+#+BEGIN_SRC bash
+git-tag-manager --alias chest --build --patch --inc
+#+END_SRC
+- Latest tag: =1.0.0-2= → New tag: =1.0.1-1=
+
+** Increment Minor Version
+#+BEGIN_SRC bash
+git-tag-manager --alias chest --build --minor --inc
+#+END_SRC
+- Latest tag: =1.0.1-3= → New tag: =1.1.0-1=
+
+** Increment Major Version Without Build
+#+BEGIN_SRC bash
+git-tag-manager --alias chest --major --inc
+#+END_SRC
+- Latest tag: =1.1.0-4= → New tag: =2.0.0=
+
+** Dry Run Example
+#+BEGIN_SRC bash
+git-tag-manager --alias chest --build --patch --inc --dry-run
+#+END_SRC
+Output:
+#+BEGIN_SRC bash
+git push origin 1.0.1-1
+#+END_SRC
+
+* Notes
+- The script always synchronizes with remote tags before incrementing.
+- If the =tree= command is unavailable, it is silently ignored during build.
+- SSH keys must be properly configured for remote access.
+
+* Contributing
+Contributions are welcome! Please submit issues or pull requests for improvements.
+
+* License
+This project is licensed under the MIT License.
+
